@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&family=Montserrat:ital,wght@0,100;0,400;0,700;1,400&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Tilt+Neon&display=swap');
+
+input:focus{
+    outline: none;
+}
+
+:root{
+    --dark-red: #c21d03;
+    --light-red: #fd5732;
+    --cream: #ffb787;
+    --dark-blue: #00668c;
+    --light-blue: #71c4ef;
+    --cloud-blue: #d4eaf7; 
+    --gray: #cccbc8;
+    --dark-green: #2E8B57;
+    --light-green: #61bc84;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: kanit, serif;
+}
+
+body{
+    /* background: url(./assets/background.jpg) center no-repeat; */
+    /* background-size: cover; */
+}
+
+/* header section start */
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(5deg, var(--dark-red), var(--light-red));
+}
+header > h1{
+    text-align: center;
+    flex: 2;
+    color:var(--cloud-blue)
+}
+
+header > .search_section{
+    flex:1;
+}
+header > .search_section > #searchBook{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header > .search_section > #searchBook > .formSearch{
+    min-width: 5rem;
+}
+/* header section end */
+
+/* input form start*/
+
+main{
+    padding: 1rem 5rem;
+}
+.input_section{
+    padding: 4rem;
+    margin: 0 auto 5rem;
+    max-width: 60rem;
+    border: .1rem solid var(--dark-blue);
+}
+
+.input_section > h2{
+    text-align: center;
+}
+
+#inputBook > .input{
+    position: relative;
+    margin: 2rem 0;
+}
+
+#inputBook > .input > input{
+    width: 100%;
+    height: 2rem;
+    border: .1rem solid var(--dark-blue);
+    padding: 1rem;
+}
+
+#inputBook > .input > input::placeholder{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#inputBook > .input > input:focus{
+    box-shadow: 0 0 .2rem var(--dark-blue),
+    0 0 .3rem var(--light-blue),
+    0 0 1rem var(--cloud-blue);
+}
+
+#inputBook > .input_inline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* input form end*/
+
+/* bookshelf-list section start*/
+.bookshelf-list{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    height: fit-content;
+    align-items: stretch;
+    justify-content: space-around;
+    flex-wrap: wrap-reverse;
+}
+.bookshelf-list > .book_shelf{
+    padding: 2rem;
+    margin: 0 5rem;
+    border: .1rem solid var(--dark-blue);
+    flex: 1;
+    min-width: 30rem;
+}
+.bookshelf-list > .book_shelf > .book_list > .book_item{
+    background: linear-gradient(var(--dark-blue), var(--cloud-blue));
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action > .red,
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action > .cancel{
+    background: linear-gradient(15deg, var(--dark-red), var(--light-red));
+}
+
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action > .green,
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action > .save{
+    background: linear-gradient(15deg, var(--dark-green), var(--light-green));
+}
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action > .blue{
+    background: linear-gradient(15deg, var(--dark-blue), var(--light-blue));
+}
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action > .red:hover{
+    background: linear-gradient(15deg, var(--light-red), var(--dark-red));
+}
+
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action > .green:hover{
+    background: linear-gradient(15deg, var(--light-green) , var(--dark-green));
+}
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action > .blue:hover{
+    background: linear-gradient(15deg, var(--light-blue), var(--dark-blue));
+}
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action{
+    display: flex;
+    position: absolute;
+    top: 80%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.bookshelf-list > .book_shelf > .book_list > .book_item > .action > button{
+    bottom: 0;
+    flex: 1;
+    border: none;
+}
+
+/* bookshelf-list section end*/
+
+@media (max-width: 720px) {
+    body{
+        font-size: 65%;
+    }
+}
