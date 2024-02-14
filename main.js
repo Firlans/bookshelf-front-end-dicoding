@@ -2,7 +2,6 @@
 let bookShelf = [];
 let bookEditId = "";
 
-
 // objecct function to create book
 function craateBook(id, title, author, year, isComplete) {
   this.id = id;
@@ -22,13 +21,13 @@ function addBook() {
     author.value,
     parseInt(year.value),
     isComplete.checked
-    );
-    bookShelf.push(book);
-    localStorage.setItem("bookShelf", JSON.stringify(bookShelf));
-  }
-  
-  // display books
-  const listBooks = (title, author, year, isComplete) => {
+  );
+  bookShelf.push(book);
+  localStorage.setItem("bookShelf", JSON.stringify(bookShelf));
+}
+
+// display books
+const listBooks = (title, author, year, isComplete) => {
   return `
   <article class="book_item">
   <h3><span class="value">${title}</span></h3>
@@ -55,13 +54,13 @@ function loadBookShelf(books = null) {
   }
   const completeBooks = bookShelf.filter((book) => book.isComplete === true);
   const incompleteBooks = bookShelf.filter((book) => book.isComplete === false);
-  
+
   document.getElementById("incompleteBookshelfList").innerHTML = incompleteBooks
     .map((book) =>
       listBooks(book.title, book.author, book.year, book.isComplete)
     )
     .join("");
-    document.getElementById("completeBookshelfList").innerHTML = completeBooks
+  document.getElementById("completeBookshelfList").innerHTML = completeBooks
     .map((book) =>
       listBooks(book.title, book.author, book.year, book.isComplete)
     )
@@ -83,7 +82,7 @@ function searchBook() {
   bookShelf = JSON.parse(localStorage.getItem("bookShelf")) || [];
   const search = document.getElementById("searchBookTitle").value;
   const books = bookShelf.filter((book) =>
-  book.title.toLowerCase().includes(search.toLowerCase())
+    book.title.toLowerCase().includes(search.toLowerCase())
   );
   loadBookShelf(books);
 }
@@ -101,7 +100,7 @@ function markBook(bookId) {
 }
 
 // update book method
-function editBook(bookId, title, author, year){
+function editBook(bookId, title, author, year) {
   bookShelf = bookShelf.map((book) => {
     if (book.id === bookId) {
       book.title = title;
@@ -114,15 +113,14 @@ function editBook(bookId, title, author, year){
   loadBookShelf();
 }
 
-
 // input display
 function inputDisplay() {
   const label = document.querySelectorAll("#inputBook .input label");
   label.forEach((item) =>
-  item.addEventListener("input", function (event) {
-    console.log("Input value:", event.target.value);
-    // Lakukan sesuatu dengan nilai input
-  })
+    item.addEventListener("input", function (event) {
+      console.log("Input value:", event.target.value);
+      // Lakukan sesuatu dengan nilai input
+    })
   );
 }
 
@@ -145,10 +143,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   isComplete.addEventListener("click", () => {
     document.getElementsByClassName("rak")[0].innerText = isComplete.checked
-    ? "sudah selesai dibaca"
-    : "belum selesai dibaca";
+      ? "sudah selesai dibaca"
+      : "belum selesai dibaca";
   });
-  
+
   bookShelfList.forEach((el) => {
     el.addEventListener("click", function (e) {
       e.preventDefault();
@@ -156,38 +154,50 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = target.closest(".book_item");
       if (target.classList.contains("green")) {
         const detail = card.getElementsByClassName("value");
-        const book = bookShelf.find((book) => book.title === detail[0].innerText && book.author === detail[1].innerText && book.year === parseInt(detail[2].innerText));
+        const book = bookShelf.find(
+          (book) =>
+            book.title === detail[0].innerText &&
+            book.author === detail[1].innerText &&
+            book.year === parseInt(detail[2].innerText)
+        );
         markBook(book.id);
       } else if (target.classList.contains("red")) {
         const detail = card.getElementsByClassName("value");
-        const book = bookShelf.find((book) => book.title === detail[0].innerText && book.author === detail[1].innerText && book.year === parseInt(detail[2].innerText));
+        const book = bookShelf.find(
+          (book) =>
+            book.title === detail[0].innerText &&
+            book.author === detail[1].innerText &&
+            book.year === parseInt(detail[2].innerText)
+        );
         const konfirmasi = confirm("apalah anda yakin akan menghapus?");
         e.preventDefault();
         if (konfirmasi) dropBook(book.id);
       } else if (target.classList.contains("blue")) {
         const detail = card.getElementsByClassName("value");
-        const book = bookShelf.find((book) => book.title === detail[0].innerText && book.author === detail[1].innerText && book.year === parseInt(detail[2].innerText));
+        const book = bookShelf.find(
+          (book) =>
+            book.title === detail[0].innerText &&
+            book.author === detail[1].innerText &&
+            book.year === parseInt(detail[2].innerText)
+        );
         const action = card.getElementsByClassName("action")[0];
         const saveButton = `<button class="edit save"> simpan </button>`;
         const cancelButton = `<button class="edit cancel"> batal </button>`;
-        
-        for(item of detail){
+
+        for (item of detail) {
           item.innerHTML = `<input type="text" class="editInput" value="${item.innerText}">`;
         }
         bookEditId = book.id;
         action.innerHTML = saveButton + cancelButton;
-      }else if (target.classList.contains("save")) {
+      } else if (target.classList.contains("save")) {
         const detail = card.getElementsByClassName("editInput");
         editBook(bookEditId, detail[0].value, detail[1].value, detail[2].value);
-      }else if (target.classList.contains("cancel")) {
+      } else if (target.classList.contains("cancel")) {
         loadBookShelf();
       }
-      
     });
   });
-  
-  
-  
+
   searchBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     searchBook();
