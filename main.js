@@ -67,6 +67,7 @@ function loadBookShelf(books = null) {
     )
     .join("");
 }
+
 // delete book method
 function dropBook(bookId) {
   const bookIndex = bookShelf.findIndex((book) => book.id === bookId);
@@ -76,6 +77,7 @@ function dropBook(bookId) {
     loadBookShelf();
   }
 }
+
 // search book method
 function searchBook() {
   bookShelf = JSON.parse(localStorage.getItem("bookShelf")) || [];
@@ -85,6 +87,7 @@ function searchBook() {
   );
   loadBookShelf(books);
 }
+
 // mark book method
 function markBook(bookId) {
   bookShelf = bookShelf.map((book) => {
